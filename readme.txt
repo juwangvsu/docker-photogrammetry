@@ -1,13 +1,15 @@
 -----------this is docker impl of the cloud image for photogrammetry---------
 
-current docker images:  mattrayner/test ---------------dep mattrayner/lamp:latest-1604
-			mattrayner/lamp:latest-1604
-
+current docker images:  jwang3vsu/dronephoto ---------------dep mattrayner/lamp:latest-1604
+			jwang3vsu/lamp:latest-1604
+data folder:
+	/media/student/data3/vrx/docker/docker-lamp/app2	1T ssd #6
+		aukerman, clover-hill-complex, OpenDroneMap
 -----------------2/9/2020-------------------
 
 (A) the docker image photo gallery works now.
 there is no save image data now. to put some data @ /home/cc/photogrammetry:
-	docker run --rm -p "3000:80" -v ${PWD}/app:/app -v ${PWD}/app2:/app2 -it mattrayner/test bash
+	docker run --rm -p "3000:80" -v ${PWD}/app:/app -v ${PWD}/app2:/app2 -it jwang3vsu/dronephoto bash
 	if need additional data on website:
 		su -l cc
 		cd ~/photogrammetry
@@ -80,11 +82,11 @@ setup opendronemap:
 -----------------2/7/2020-------------------
 
 
-docker build -t=mattrayner/lamp:latest-1604 -f ./1604/Dockerfile .
-docker build -t=mattrayner/test -f ./1604_bld2/Dockerfile .
+docker build -t=jwang3vsu/lamp:latest-1604 -f ./1604/Dockerfile .
+docker build -t=jwang3vsu/dronephoto -f ./1604_bld2/Dockerfile .
 
-docker run --rm -p "3000:80" -v ${PWD}/app:/app mattrayner/test 
-docker run --rm -p "3000:80" -it mattrayner/test bash
+docker run --rm -p "3000:80" -v ${PWD}/app:/app jwang3vsu/dronephoto 
+docker run --rm -p "3000:80" -it jwang3vsu/dronephoto bash
 
 
 access url:

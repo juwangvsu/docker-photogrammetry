@@ -1,4 +1,4 @@
-FROM mattrayner/lamp:latest-1604
+FROM jwang3vsu/lamp:latest-1604
 #ADD supporting_files/run2.sh /run2.sh
 ADD supporting_files/run3.sh /run3.sh
 ADD supporting_files/init_db.sh /init_db.sh
