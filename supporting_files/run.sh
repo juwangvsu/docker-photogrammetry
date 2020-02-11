@@ -1,5 +1,6 @@
 #!/bin/bash
-
+#apt install -y libjpeg-progs
+service ssh start
 VOLUME_HOME="/var/lib/mysql"
 
 if [ -e /etc/php/5.6/apache2/php.ini ]
@@ -7,8 +8,13 @@ then
     sed -ri -e "s/^upload_max_filesize.*/upload_max_filesize = ${PHP_UPLOAD_MAX_FILESIZE}/" \
         -e "s/^post_max_size.*/post_max_size = ${PHP_POST_MAX_SIZE}/" /etc/php/5.6/apache2/php.ini
 else
-    sed -ri -e "s/^upload_max_filesize.*/upload_max_filesize = ${PHP_UPLOAD_MAX_FILESIZE}/" \
-        -e "s/^post_max_size.*/post_max_size = ${PHP_POST_MAX_SIZE}/" /etc/php/7.2/apache2/php.ini
+    if [ -e /app2/php.ini ]
+    then
+	cp /app2/php.ini /etc/php/7.4/apache2/php.ini
+    else
+        sed -ri -e "s/^upload_max_filesize.*/upload_max_filesize = ${PHP_UPLOAD_MAX_FILESIZE}/" \
+           -e "s/^post_max_size.*/post_max_size = ${PHP_POST_MAX_SIZE}/" /etc/php/7.4/apache2/php.ini
+    fi
 fi
 
 
@@ -39,7 +45,7 @@ else
     chmod -R 770 /var/lib/mysql
     chmod -R 770 /var/run/mysqld
 fi
-
+echo 'hi'
 rm /var/run/mysqld/mysqld.sock
 
 sed -i "s/bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/my.cnf
